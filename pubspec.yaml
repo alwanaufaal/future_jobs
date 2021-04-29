@@ -30,6 +30,8 @@ dependencies:
   cupertino_icons: ^1.0.0
   google_fonts: ^2.0.0
   email_validator: ^2.0.1
+  http: ^0.13.2
+  provider: ^5.0.0
   # android_notification_listener2: ^2.0.1
   notifications: ^1.1.0
 
