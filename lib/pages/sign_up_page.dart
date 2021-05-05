@@ -280,22 +280,29 @@ class _SignUpPageState extends State<SignUpPage> {
               )
             : TextButton(
                 onPressed: () async {
-                  setState(() {
-                    isLoading = true;
-                  });
-
-                  UserModel user = await authProvider.register(
-                      emailController.text,
-                      passwordController.text,
-                      nameController.text,
-                      goalController.text);
-
-                  if (user == null) {
-                    showError('email sudah terdaftar');
+                  if (nameController.text.isEmpty ||
+                      emailController.text.isEmpty ||
+                      passwordController.text.isEmpty ||
+                      goalController.text.isEmpty) {
+                    showError("semua fields harus diisi");
                   } else {
-                    userProvider.user = user;
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, '/home', (route) => false);
+                    setState(() {
+                      isLoading = true;
+                    });
+
+                    UserModel user = await authProvider.register(
+                        emailController.text,
+                        passwordController.text,
+                        nameController.text,
+                        goalController.text);
+
+                    if (user == null) {
+                      showError('email sudah terdaftar');
+                    } else {
+                      userProvider.user = user;
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, '/home', (route) => false);
+                    }
                   }
                 },
                 style: TextButton.styleFrom(
